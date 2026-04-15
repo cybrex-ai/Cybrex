@@ -1,4 +1,4 @@
-models/
+models/*
 memory/
 system_prompt.txt
 notes/
