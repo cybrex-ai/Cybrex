@@ -1,4 +1,4 @@
-# Core LLM inference
+# LLM
 llama-cpp-python
 # Speech-to-text
 openai-whisper
@@ -12,6 +12,3 @@ PyAudio
 mem0ai
 sentence-transformers
 chromadb
-# Utilities
-requests
-pyyaml
