@@ -1,0 +1,16 @@
+# Core LLM inference
+llama-cpp-python
+
+# Speech-to-text
+openai-whisper
+
+# Text-to-speech
+kokoro
+
+# Audio
+sounddevice
+pyaudio
+
+# ML
+torch
+numpy

@@ -1,0 +1,5 @@
+input: terminal
+output: terminal
+core: llama-cpp
+memory_short: flashback
+memory_long: mem0
