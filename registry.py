@@ -29,9 +29,14 @@ class Registry:
         with open(path) as f:
             config = yaml.safe_load(f)
 
-        for capability, module_name in config.items():
-            mod = importlib.import_module(f"modules.{capability}.{module_name}")
-            instance = mod.Module()
+        for capability, spec in config.items():
+            if isinstance(spec, str):
+                mod = importlib.import_module(f"modules.{capability}.{spec}")
+                instance = mod.Module()
+            else:
+                module_name = spec.pop("module")
+                mod = importlib.import_module(f"modules.{capability}.{module_name}")
+                instance = mod.Module(**spec)
             api.register(capability, instance)
 
         return api
