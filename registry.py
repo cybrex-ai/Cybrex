@@ -1,7 +1,7 @@
 import importlib
 import yaml
 
-class Cybrex:
+class Registry:
     def __init__(self):
         self._registry = {}
 

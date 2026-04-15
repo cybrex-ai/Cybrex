@@ -1,10 +1,10 @@
-from cybrex import Cybrex
+from registry import Registry
 
 def run():
     with open("system_prompt.txt") as f:
         system_prompt = f.read()
 
-    with Cybrex.from_config() as api:
+    with Registry.from_config() as api:
         inp = api.get("input")
         output = api.get("output")
         core = api.get("core")
