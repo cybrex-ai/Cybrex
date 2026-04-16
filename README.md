@@ -7,7 +7,7 @@ A modular AI assistant.
 - A GGUF model file (e.g. from [HuggingFace](https://huggingface.co/models?library=gguf))
 - CUDA toolkit (optional, for NVIDIA GPU acceleration)
 
-For speech input/output you will also need a microphone and speakers.
+For speech input/output, a microphone and speakers are required.
 
 ## Quickstart
 
@@ -86,6 +86,7 @@ Place it under `modules/<capability>/your_module.py` and reference it in `config
 - [ ] Vision module
 - [ ] Internet access
 - [ ] Action module
+- [ ] GUI
 - [ ] 2D character overlay module
 
 ## License
