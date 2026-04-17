@@ -9,10 +9,10 @@ from interfaces import LongTermMemoryInterface
 
 
 class Module(LongTermMemoryInterface):
-    def __init__(self, model_path, **kwargs):
+    def __init__(self, model_path, n_gpu_layers, **kwargs):
         self.user_id = "user"
         self.server = subprocess.Popen(
-            ["python", "-m", "llama_cpp.server", "--model", model_path, "--port", "8080", "--n_gpu_layers", "5"],
+            ["python", "-m", "llama_cpp.server", "--model", model_path, "--port", "8080", "--n_gpu_layers", str(n_gpu_layers)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             preexec_fn=os.setsid
