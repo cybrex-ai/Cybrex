@@ -30,7 +30,8 @@ class Module(LongTermMemoryInterface):
             "embedder": {
                 "provider": "huggingface",
                 "config": {
-                    "model": "sentence-transformers/all-MiniLM-L6-v2"
+                    "model": "Qwen/Qwen3-Embedding-0.6B",
+                    "model_kwargs": {"device": "cpu"}
                 }
             },
             "vector_store": {
