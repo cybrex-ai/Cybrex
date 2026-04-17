@@ -82,7 +82,7 @@ Place it under `modules/<capability>/your_module.py` and reference it in `config
 
 - [ ] Model warmup
 - [ ] Context overflow prevention  
-- [ ] Interrupt mid-generation
+- [x] Interrupt mid-generation
 - [ ] Vision module
 - [ ] Internet access
 - [ ] Action module
