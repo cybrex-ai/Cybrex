@@ -25,9 +25,18 @@ def run():
                 context = short_mem.get()
                 reply = ""
 
-                for token in core.generate(user_input, context, memories):
-                    output.send(token)
-                    reply += token
+                try:
+                    for token in core.generate(user_input, context, memories):
+                        if inp.has_input():
+                            core.interrupt()
+                            output.interrupt()
+                            break
+                        output.send(token)
+                        reply += token
+                except KeyboardInterrupt:
+                    core.interrupt()
+                    output.interrupt()
+                    print("\n[interrupted]")
             
                 short_mem.add("user", user_input)
                 short_mem.add("assistant", reply)

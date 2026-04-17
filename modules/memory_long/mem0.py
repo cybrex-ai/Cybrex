@@ -3,17 +3,19 @@ import time
 import requests
 import threading
 import queue
+import os
 from mem0 import Memory
 from interfaces import LongTermMemoryInterface
 
 
 class Module(LongTermMemoryInterface):
-    def __init__(self, user_id: str = "k5031", model_path: str = "models/Qwen3.5-0.8B-Q4_K_M.gguf"):
+    def __init__(self, user_id: str = "user", model_path: str = "models/gemma-4-E2B-it-Q4_K_M.gguf"):
         self.user_id = user_id
         self.server = subprocess.Popen(
-            ["python", "-m", "llama_cpp.server", "--model", model_path, "--port", "8080", "--n_gpu_layers", "-1"],
+            ["python", "-m", "llama_cpp.server", "--model", model_path, "--port", "8080", "--n_gpu_layers", "5"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            preexec_fn=os.setsid
         )
         self._wait_for_server()
         self.memory = Memory.from_config({
@@ -59,7 +61,10 @@ class Module(LongTermMemoryInterface):
             if messages is None:
                 self._queue.task_done()
                 break
-            self.memory.add(messages, user_id=self.user_id)
+            try:
+                self.memory.add(messages, user_id=self.user_id)
+            except Exception as e:
+                print(f"Memory store failed: {e}")
             self._queue.task_done()
 
     def stop(self):

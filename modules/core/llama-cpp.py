@@ -16,7 +16,7 @@ class Module(CoreInterface):
         self.llm = Llama(
             model_path=model_path,
             n_ctx=n_ctx,
-            offload_kqv=False,
+            offload_kqv=True,
             n_gpu_layers=n_gpu_layers,
             main_gpu=0,
             n_threads=4,
@@ -27,16 +27,21 @@ class Module(CoreInterface):
             cache=True,
             verbose=False,
         )
+        self._interrupted = False
+    
+    def interrupt(self):
+        self._interrupted = True    
 
     def set_system_prompt(self, prompt: str) -> None:
         self.system_prompt = prompt
 
     def generate(self, user_input: str, context: list[dict], memories: str) -> Iterator[str]:
+        self._interrupted = False
         for chunk in self.llm.create_chat_completion(
             messages=[
-                {"role": "system", "content": f"{self.system_prompt}\n\nRelevant memories from past conversations:\n{memories}"},
+                {"role": "system", "content": self.system_prompt},  # static — will be cached after first call
                 *context,
-                {"role": "user", "content": user_input},
+                {"role": "user", "content": f"Relevant context:\n{memories}\n\n{user_input}" if memories else user_input},
             ],
             stream=True,
             temperature=0.45,
@@ -44,5 +49,7 @@ class Module(CoreInterface):
             repeat_penalty=1.1,
             max_tokens=512,
         ):
+            if self._interrupted:
+                break
             token = chunk["choices"][0]["delta"].get("content", "")
             yield token

@@ -128,3 +128,6 @@ class Module(InputInterface):
             if text:
                 return text
             sleep(0.05)
+    
+    def has_input(self) -> bool:
+        return not self.output_queue.empty()

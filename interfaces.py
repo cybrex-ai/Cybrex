@@ -6,6 +6,10 @@ class InputInterface(ABC):
     @abstractmethod
     def get_input(self) -> str:
         """Block until input is received. Returns input as string."""
+    
+    @abstractmethod
+    def has_input(self) -> bool:
+        """Check if something has been inputted during generation. Used for mid-generation interruption."""
 
 
 class OutputInterface(ABC):
@@ -26,6 +30,10 @@ class CoreInterface(ABC):
     @abstractmethod
     def set_system_prompt(self, prompt: str) -> None:
         """Set the system prompt used for all subsequent generations."""
+    
+    @abstractmethod
+    def interrupt(self) -> None:
+        """Interrupt LLM generation"""
 
 
 class ShortTermMemoryInterface(ABC):
