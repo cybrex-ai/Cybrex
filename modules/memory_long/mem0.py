@@ -9,8 +9,8 @@ from interfaces import LongTermMemoryInterface
 
 
 class Module(LongTermMemoryInterface):
-    def __init__(self, user_id: str = "user", model_path: str = "models/gemma-4-E2B-it-Q4_K_M.gguf"):
-        self.user_id = user_id
+    def __init__(self, model_path, **kwargs):
+        self.user_id = "user"
         self.server = subprocess.Popen(
             ["python", "-m", "llama_cpp.server", "--model", model_path, "--port", "8080", "--n_gpu_layers", "5"],
             stdout=subprocess.DEVNULL,

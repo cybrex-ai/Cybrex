@@ -24,7 +24,7 @@ pip install -r requirements.txt
 > CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
 > ```
 
-Edit `config.yaml`'s core section with your model path and hardware settings, then:
+Edit `config.yaml`'s core and memory_long sections with your model path and hardware settings, then:
 
 ```bash
 python main.py

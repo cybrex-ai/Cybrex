@@ -6,9 +6,9 @@ from interfaces import CoreInterface
 class Module(CoreInterface):
     def __init__(
         self,
-        model_path: str = "models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf",
-        n_gpu_layers: int = 10,
-        n_ctx: int = 32768,
+        model_path,
+        n_gpu_layers,
+        n_ctx,
         **kwargs
     ):
         self.system_prompt = "You are an AI assistant. Keep responses concise."
