@@ -3,6 +3,7 @@ models/*
 memory/
 system_prompt.txt
 notes/
+config.yaml
 
 # Test
 tests/

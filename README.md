@@ -14,6 +14,7 @@ For speech input/output, a microphone and speakers are required.
 ```bash
 git clone https://github.com/cybrex-ai/Cybrex
 cd Cybrex
+cp config.example.yaml config.yaml
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
